@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+        /* CSS nhanh để tối giản giao diện */
+        body, html { height: 100%; margin: 0; font-family: Arial, sans-serif; }
+        .bg {
+            background-image: url('img/bg.jpg'); /* Ảnh nền đồ ăn */
+            height: 100%; background-position: center; background-size: cover;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px; border-radius: 15px; text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .btn {
+            display: block; width: 200px; padding: 15px; margin: 10px auto;
+            text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s;
+        }
+        .btn-login { background: #be1e2d; color: white; }
+        .btn-reg { border: 2px solid #be1e2d; color: #be1e2d; }
+        .btn:hover { opacity: 0.8; transform: scale(1.05); }
+    </style>
+    </head>
+    <body>
+        <div class="bg">
+            <div class="login-box">
+                <img src="images/logo.jpg" width="120" alt="Logo">
+                <h2>Chào mừng bạn đến với MixiFood</h2>
+                <p>Vui lòng đăng nhập để khám phá kho đồ ăn vặt!</p>
+                <a href="view/login.jsp" class="btn btn-login">ĐĂNG NHẬP</a>
+                <a href="view/register.jsp" class="btn btn-reg">ĐĂNG KÝ</a>
+            </div>
+        </div>
+    </body>
+</html>

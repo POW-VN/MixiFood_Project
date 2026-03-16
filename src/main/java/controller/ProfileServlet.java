@@ -1,0 +1,140 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package controller;
+
+import data.CartDAO;
+import data.CustomerDAO;
+import data.OrdersDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Customer;
+
+/**
+ *
+ * @author Admin
+ */
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/ProfileServlet"})
+public class ProfileServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ProfileServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ProfileServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = "/view/profile.jsp";
+        HttpSession session = request.getSession();
+        Customer customer = (Customer)session.getAttribute("acc");
+        if (customer!=null) request.setAttribute("carts", CartDAO.getCart(customer.getCustomerID()));
+        
+        request.setAttribute("userOrders", OrdersDAO.getOrdersCustomer(customer.getCustomerID()));
+        
+        String action = request.getParameter("action");
+        if (action==null) action = "list";
+        
+        if (action.equals("viewOrderCus")){
+            String id = request.getParameter("id");
+            int orderID = Integer.parseInt(id);
+            
+            url = "/view/viewOrderCus.jsp";
+            request.setAttribute("order", OrdersDAO.getOrder(orderID));
+        } else if (action.equals("updatestatus")){
+            int id = Integer.parseInt(request.getParameter("id"));
+            int status = Integer.parseInt(request.getParameter("status"));
+            OrdersDAO.updateStatus(id, status);
+        }
+        
+        request.getRequestDispatcher(url).forward(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = "/view/profile.jsp";
+        HttpSession session = request.getSession();
+        Customer customer = (Customer)session.getAttribute("acc");
+        
+        request.setAttribute("userOrders", OrdersDAO.getOrdersCustomer(customer.getCustomerID()));
+        String action = request.getParameter("action");
+        if (action==null) action = "list";
+        
+        if (action.equals("updateProfile")){
+            String name = request.getParameter("name");
+            String phone = request.getParameter("phone");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            
+            CustomerDAO.updateCustomer(new Customer(customer.getCustomerID(),name,phone,username, password));
+            
+            session.setAttribute("acc", CustomerDAO.getCustomer(customer.getCustomerID()));
+        } else if (action.equals("updateOrderUser")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String address = request.getParameter("address");
+            String note = request.getParameter("note");
+            OrdersDAO.updateOrderInfo(id, address, note);
+            
+        }
+        
+        request.getRequestDispatcher(url).forward(request, response);
+        
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

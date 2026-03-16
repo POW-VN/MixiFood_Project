@@ -1,0 +1,311 @@
+ /* --- PHẦN CSS TRANG HOME & HEADER --- */
+body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; }
+a {
+    text-decoration: none;
+}
+
+/* Đảm bảo logo luôn nằm giữa theo chiều dọc */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+header {
+    background-color: #be1e2d;
+    padding: 10px 50px;
+    display: flex;             /* QUAN TRỌNG: Ép các khối con lên 1 hàng */
+    justify-content: space-between; /* Logo bên trái, header-right bên phải */
+    align-items: center;       /* Căn giữa theo chiều dọc */
+    color: white;
+}
+
+/* Khối bao gồm cả Tìm kiếm và Giỏ hàng */
+.header-right {
+    display: flex;             /* QUAN TRỌNG: Ép Search và Cart lên 1 hàng */
+    align-items: center;       /* Căn giữa Search và Cart theo chiều dọc */
+    gap: 15px;                 /* Khoảng cách giữa Search và Cart */
+}
+
+/* Đảm bảo Form tìm kiếm không chiếm hết dòng */
+.search-tool form {
+    display: flex;             /* Ép Input và Button lên 1 hàng */
+    margin: 0;
+}
+
+.search-tool input {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-tool button {
+    padding: 7px 15px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Nút giỏ hàng */
+.cart-link {
+    background-color: #333;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;             /* Căn chỉnh số lượng bên trong nút */
+    align-items: center;
+    white-space: nowrap;       /* Ngăn không cho chữ "Giỏ hàng" xuống dòng */
+}
+
+.cart-count {
+    background: #fff;
+    color: #be1e2d;
+    margin-left: 8px;
+    padding: 0 6px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+/* Lưới sản phẩm Home... (giữ nguyên) */
+
+/* Class giá đồng bộ */
+.price {
+    color: #be1e2d;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+/* --- PHẦN CSS MỚI DÀNH RIÊNG CHO TRANG DETAIL --- */
+
+/* Container chính bao ngoài */
+.main-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+/* Bố cục 2 cột cho trang chi tiết */
+.detail-layout {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap; /* Tự xuống dòng trên thiết bị di động */
+    align-items: flex-start;
+}
+
+/* Hộp chứa hình ảnh bên trái */
+.detail-image-box {
+    flex: 1; /* Chiếm 1 phần diện tích */
+    min-width: 300px;
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+.detail-image-box img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: contain; /* Giữ nguyên tỉ lệ ảnh bò khô/cơm cháy không bị méo */
+}
+
+/* Hộp chứa thông tin bên phải */
+.detail-info-box {
+    flex: 1.5; /* Chiếm 1.5 phần diện tích */
+    min-width: 300px;
+}
+
+.detail-product-name {
+    font-size: 28px;
+    color: #333;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+/* Giá trang Detail - làm nổi bật hơn */
+.detail-price {
+    font-size: 24px;
+    padding: 15px;
+    background: #fff5f5; /* Nền đỏ nhạt để làm nổi bật giá */
+    border-radius: 4px;
+    display: inline-block;
+    margin: 20px 0;
+}
+
+.detail-description h3 {
+    border-bottom: 2px solid #be1e2d; /* Gạch chân màu đỏ chủ đạo */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.detail-description p {
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Vùng chọn số lượng và nút mua hàng */
+.add-to-cart-form {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.quantity-input-group {
+    margin-bottom: 20px;
+}
+
+.quantity-input-group label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.quantity-input-group input {
+    padding: 10px;
+    width: 60px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Nút THÊM VÀO GIỎ HÀNG chủ đạo */
+.btn-add-to-cart {
+    background: #be1e2d; /* Màu đỏ chủ đạo ABC */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%; /* Chiếm hết chiều rộng */
+    transition: background-color 0.3s;
+}
+
+.btn-add-to-cart:hover {
+    background: #333; /* Chuyển màu khi di chuột vào */
+}
+
+.btn-disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Nút Quay lại */
+.back-link-wrapper {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.back-link {
+    display: inline-block;
+    color: #666;
+    text-decoration: none; /* Bỏ gạch chân mặc định */
+}
+
+.back-link:hover {
+    color: #be1e2d;
+    text-decoration: underline;
+}
+.logo a {
+    color: white !important;      /* Đổi màu chữ thành trắng */
+    text-decoration: none;        /* Bỏ gạch chân */
+    font-size: 28px;              /* Chỉnh độ to cho bằng trang kia */
+    font-weight: bold;
+}
+
+/* Đảm bảo khi di chuột vào hay sau khi click vẫn giữ màu trắng */
+.logo a:visited, .logo a:hover, .logo a:active {
+    color: white !important;
+}
+
+/* Style cho nhóm thông tin phụ */
+.product-meta p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Style cho loại sản phẩm */
+.badge-type {
+    background-color: #eee;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Style chung cho trạng thái */
+.status {
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* Màu cho trạng thái Còn hàng */
+.in-stock {
+    background-color: #e6ffed;
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+/* Màu cho trạng thái Hết hàng */
+.out-of-stock {
+    background-color: #fff1f0;
+    color: #cf1322;
+    border: 1px solid #cf1322;
+}
+
+.user-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.auth-btn {
+    background-color: #333;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.auth-btn:hover {
+    background-color: #555;
+}
+
+/* Nút đăng xuất có thể để màu xám hoặc đen nhạt hơn */
+.auth-btn.logout {
+    background-color: #444;
+}
+
+.auth-btn.admin-btn {
+    background-color: #ffc107; /* Màu vàng đặc trưng cho Admin */
+    color: #000 !important;
+    font-weight: bold;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.auth-btn.admin-btn:hover {
+    background-color: #e0a800;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
